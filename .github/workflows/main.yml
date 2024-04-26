@@ -24,6 +24,6 @@ jobs:
   run:
     needs: [print-inputs]
     runs-on: ubuntu-latest
-    environment: production
+    environment: testing
     steps:
       - run: echo ${{ inputs.logLevel }}
