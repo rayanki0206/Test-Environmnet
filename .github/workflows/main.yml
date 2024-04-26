@@ -4,9 +4,9 @@ on:
   workflow_dispatch: 
     inputs:
       appshortcode_dp:
-      description: 'Application Shortcode,data_product_name: GLSM,Service Management'
-      required: true
-      type: string
+        description: 'Application Shortcode,data_product_name: GLSM,Service Management'
+        required: true
+        type: string
 
 jobs:
   print_hello_world:
