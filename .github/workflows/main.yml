@@ -1,17 +1,29 @@
-name: Print Hello World
+name: workflow-dispatch-with-environment
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
     inputs:
-      appshortcode_dp:
-        description: 'Application Shortcode,data_product_name: GLSM,Service Management'
+      logLevel:
+        description: 'Log level'
         required: true
-        type: string
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
 
 jobs:
-  print_hello_world:
+  print-inputs:
     runs-on: ubuntu-latest
-    environment: testing
     steps:
-      - name: Print Hello World
-        run: echo "Hello, World!"
+      - name: job summary
+        run: |
+          echo "### inputs" >> $GITHUB_STEP_SUMMARY
+          echo "- logLevel: ${{ inputs.logLevel }}" >> $GITHUB_STEP_SUMMARY
+  run:
+    needs: [print-inputs]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - run: echo ${{ inputs.logLevel }}
